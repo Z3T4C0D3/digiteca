@@ -8,9 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Categorias extends Model
 {
     use HasFactory;
-    /* RELACIONES ELOQUENT */
-    //RELACION UNO A MUCHOS
-    public function libros(){
-        return $this->hasMany(Libros::class);
-    }
+    protected $fillable=['nombreCategoria'];
 }

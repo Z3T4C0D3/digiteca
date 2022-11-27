@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Autores extends Model
 {
     use HasFactory;
-    /* RELACIONES ELOQUENT */
-    //RELACION MUCHOS A MUCHOS
-    public function libros(){
-        return $this->belongsToMany(Libros::class);
-    }
+    protected $fillable=['nombre','apellidoPaterno','apellidoMaterno',];
+    
 }

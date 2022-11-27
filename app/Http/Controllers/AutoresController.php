@@ -14,7 +14,8 @@ class AutoresController extends Controller
      */
     public function index()
     {
-        //
+        $autores=Autores::all();
+        return view('autores.index',compact('autores'));
     }
 
     /**
@@ -24,7 +25,7 @@ class AutoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('autores.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class AutoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+       
+        $autor = Autores::create(['nombre' => $request->input('nombre'),
+                                'apellidoPaterno' => $request->input('apellidoPaterno'),
+                                'apellidoMaterno' => $request->input('apellidoMaterno')]);
+        
+        return redirect()->route('autores.index');
     }
 
     /**
@@ -55,9 +62,9 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Autores $autores)
+    public function edit(Autores $autore)
     {
-        //
+            return view('autores.edit',compact('autore'));
     }
 
     /**
@@ -67,9 +74,13 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autores $autores)
+    public function update(Request $request, Autores $autore)
     {
-        //
+        $autore->update(['nombre' => $request->input('nombre'),
+                                'apellidoPaterno' => $request->input('apellidoPaterno'),
+                                'apellidoMaterno' => $request->input('apellidoMaterno')]);
+        
+        return redirect()->route('autores.index');
     }
 
     /**
@@ -78,8 +89,9 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autores $autores)
+    public function destroy(Autores $autore)
     {
-        //
+        $autore->delete();
+        return redirect()->route('autores.index');
     }
 }

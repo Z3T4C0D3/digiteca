@@ -14,7 +14,8 @@ class EditorialesController extends Controller
      */
     public function index()
     {
-        //
+        $editoriales=Editoriales::all();
+        return view('editoriales.index',compact('editoriales'));
     }
 
     /**
@@ -24,7 +25,7 @@ class EditorialesController extends Controller
      */
     public function create()
     {
-        //
+        return view('editoriales.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class EditorialesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Editoriales::create(['nombreEditorial' => $request->input('nombreEditorial'),]);
+        return redirect()->route('editoriales.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class EditorialesController extends Controller
      * @param  \App\Models\Editoriales  $editoriales
      * @return \Illuminate\Http\Response
      */
-    public function edit(Editoriales $editoriales)
+    public function edit(Editoriales $editoriale)
     {
-        //
+        return view('editoriales.edit',compact('editoriale'));
     }
 
     /**
@@ -67,9 +69,10 @@ class EditorialesController extends Controller
      * @param  \App\Models\Editoriales  $editoriales
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Editoriales $editoriales)
+    public function update(Request $request, Editoriales $editoriale)
     {
-        //
+        $editoriale->update(['nombreEditorial' => $request->input('nombreEditorial'),]);
+        return redirect()->route('editoriales.index');
     }
 
     /**
@@ -78,8 +81,9 @@ class EditorialesController extends Controller
      * @param  \App\Models\Editoriales  $editoriales
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Editoriales $editoriales)
+    public function destroy(Editoriales $editoriale)
     {
-        //
+        $editoriale->delete();
+        return redirect()->route('editoriales.index');
     }
 }
