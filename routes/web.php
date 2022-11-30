@@ -6,6 +6,8 @@ use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\AutoresController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EditorialesController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,8 @@ Auth::routes();
 Route::get('/home', [LibrosController::class, 'welcome'] )->name('libros.welcome');
 
 Route::group(['middleware'=>['auth']],function(){
+    Route::resource("roles",RolController::class);
+    Route::resource("usuarios",UsuarioController::class);
     Route::resource("autores",AutoresController::class);
     Route::resource("categorias",CategoriasController::class);
     Route::resource("editoriales",EditorialesController::class);

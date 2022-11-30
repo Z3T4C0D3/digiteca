@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:ver-categoria|crear-categoria|editar-categoria|borrar-categoria', ['only' => ['index']]);
+         $this->middleware('permission:crear-categoria', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-categoria', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-categoria', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

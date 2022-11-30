@@ -6,9 +6,11 @@
 				<h1 class="text-center text-white">Editoriales</h1>
 			</div>
 			<div class="row d-flex justify-content-center">
+				@can('crear-editorial')
 				<div class="col-6 d-flex justify-content-center">
 					<a href="editoriales/create" class="btn btn-dark mt-3 mb-3">Cargar nueva editorial</a>
 				</div>
+				@endcan
 			</div>
 			<div class="row d-flex justify-content-center">
 				<div class="col-5 d-flex justify-content-center">
@@ -27,9 +29,12 @@
 			                  <td>{{$datos->nombreEditorial}}</td>
 			                  <td>
 			                  	<div class="row d-flex justify-content-center">
+			                  		@can('editar-editorial')
 			                  		<div class="col-6 d-flex justify-content-center">
 			                  			<a class="btn btn-dark" href="{{route('editoriales.edit',$datos->id)}}">Editar</a>
 			                  		</div>
+			                  		@endcan
+			                  		@can('borrar-editorial')
 			                  		<div class="col-6 d-flex justify-content-center">
 			                  			<form action="{{route('editoriales.destroy',$datos->id)}}" method="post">
 			                          		@csrf
@@ -37,6 +42,7 @@
 			                          		<button class="btn btn-dark" type="submit">Borrar</button>
 			                      		</form>
 			                  		</div>
+			                  		@endcan
 			                  	</div>
 			                  </td>
 			                </tr>

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class EditorialesController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:ver-editorial|crear-editorial|editar-editorial|borrar-editorial', ['only' => ['index']]);
+         $this->middleware('permission:crear-editorial', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-editorial', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-editorial', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

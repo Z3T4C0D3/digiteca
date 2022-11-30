@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class AutoresController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:ver-autor|crear-autor|editar-autor|borrar-autor', ['only' => ['index']]);
+         $this->middleware('permission:crear-autor', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-autor', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-autor', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

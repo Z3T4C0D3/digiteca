@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class LibrosController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:ver-libro|crear-libro|editar-libro|borrar-libro', ['only' => ['index']]);
+         $this->middleware('permission:crear-libro', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-libro', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-libro', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
