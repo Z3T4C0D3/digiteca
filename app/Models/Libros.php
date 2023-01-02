@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class Libros extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'Titulo',
+        'Codigo',
+        'idCategoria',
+        'idEditorial',
+    ];
     /* RELACIONES ELOQUENT */
     //RELACION UNO A MUCHOS INVERSA
     public function categorias(){

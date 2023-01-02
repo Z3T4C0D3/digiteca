@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Editoriales extends Model
+class Ejemplares extends Model
 {
     use HasFactory;
-     protected $fillable=['nombreEditorial'];
-    /* RELACIONES ELOQUENT */
-    //RELACION UNO A MUCHOS
+    protected $fillable=[
+        'libros_id','num_copia'
+    ];
     public function libros(){
-        return $this->hasMany(Libros::class);
+        return $this->hasMany(libros::class);
     }
 }

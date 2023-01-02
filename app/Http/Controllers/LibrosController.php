@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Libros;
 use Illuminate\Http\Request;
-
+use App\Models\Categorias;
+use App\Models\Editoriales;
+use App\Models\Autores;
+use App\Models\LibrosAutores;
+use App\Models\Ejemplares;
 class LibrosController extends Controller
 {
     function __construct()
@@ -36,7 +40,10 @@ class LibrosController extends Controller
      */
     public function create()
     {
-        //
+        $categorias=Categorias::all();
+        $editoriales=Editoriales::all();
+        $autores=Autores::all();
+        return view('libros.create',compact("categorias","editoriales","autores"));
     }
 
     /**
@@ -47,7 +54,22 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $libro=Libros::Create($request->all());
+
+
+        foreach ($request->idAutor as $autor) {
+            //dd($autor);
+            $asigna_autor=LibrosAutores::Create(['idLibro'=>$libro->id,
+                        'idAutor'=>$autor]);
+        }
+
+        for($i=1;$i<=$request->num_copia;$i++){
+            Ejemplares::Create(['libros_id'=>$libro->id,'num_copia'=>$i,]);
+        }
+
+        return redirect()->route('libros.index');
+
     }
 
     /**
@@ -67,9 +89,12 @@ class LibrosController extends Controller
      * @param  \App\Models\Libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function edit(Libros $libros)
+    public function edit(Libros $libro)
     {
-        //
+        $categorias=Categorias::all();
+        $editoriales=Editoriales::all();
+        $autores=Autores::all();
+        return view('libros.edit', compact('libro','categorias','editoriales','autores'));
     }
 
     /**
@@ -79,9 +104,13 @@ class LibrosController extends Controller
      * @param  \App\Models\Libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Libros $libros)
+    public function update(Request $request, Libros $libro)
     {
-        //
+        $libro->update(['Titulo' => $request->input('Titulo'),
+                        'Codigo'=>$request->input('Codigo'),
+                        'idCategoria'=>$request->input('idCategoria'),
+                        'idEditorial'=>$request->input('idEditorial')]);
+        return redirect()->route('libros.index');
     }
 
     /**
@@ -90,8 +119,9 @@ class LibrosController extends Controller
      * @param  \App\Models\Libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Libros $libros)
+    public function destroy(Libros $libro)
     {
-        //
+        $libro->delete();
+        return redirect()->route('libros.index');
     }
 }

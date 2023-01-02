@@ -84,8 +84,8 @@ class AutoresController extends Controller
     public function update(Request $request, Autores $autore)
     {
         $autore->update(['nombre' => $request->input('nombre'),
-                                'apellidoPaterno' => $request->input('apellidoPaterno'),
-                                'apellidoMaterno' => $request->input('apellidoMaterno')]);
+                        'apellidoPaterno' => $request->input('apellidoPaterno'),
+                        'apellidoMaterno' => $request->input('apellidoMaterno')]);
         
         return redirect()->route('autores.index');
     }
