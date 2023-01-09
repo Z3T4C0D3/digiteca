@@ -27,4 +27,8 @@ class Libros extends Model
     public function autores(){
         return $this->belongsToMany(Autores::class);
     }
+    //RELACION POLIMORFICA UNO A UNO
+    public function image(){
+        return $this->morphOne(images::class, 'imageable');
+    }
 }

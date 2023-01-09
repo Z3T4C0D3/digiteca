@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('libros', function (Blueprint $table) {
-            $table->id();
-            $table->string('Titulo');
-            $table->string('Codigo');
-            $table->string('Anio');
-            $table->unsignedBigInteger('idEditorial');
-            //FOREIGN KEY 
-            $table->foreign('idEditorial')->references('id')->on('editoriales')->onDelete('cascade');
+        Schema::create('images', function (Blueprint $table) {
+            $table->string('url');
+            $table->unsignedBigInteger('imageable_id');
+            $table->string('imageable_type');
+            $table->primary(['imageable_id', 'imageable_type']);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libros');
+        Schema::dropIfExists('images');
     }
 };

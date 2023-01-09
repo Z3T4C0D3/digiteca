@@ -9,4 +9,7 @@ class Categorias extends Model
 {
     use HasFactory;
     protected $fillable=['nombreCategoria'];
+    public function libros(){
+        return $this->hasMany(libros::class);
+    }
 }

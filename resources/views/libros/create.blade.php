@@ -1,11 +1,19 @@
 @extends('layouts.app')
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
         // Select2 Multiple
-        $('.select2-multiple').select2({
-            placeholder: "Select",
-            allowClear: true
+        $('.autores').select2({
+            theme: "classic",
+            placeholder: "Eligir autor",
+            
+        });
+        $('.categorias').select2({
+            theme: "classic",
+            placeholder: "Eligir categoria",
+            
         });
     });
 </script>
@@ -49,19 +57,15 @@
 	                    	</div>
 	                   </div>
 
-	                    <div class="row d-flex justify-content-center">
-	                    	<div class="col-8">
-	                            <div class="form-group">
-	                                <label for="" class="text-white">Categoria del libro</label>
-	                               	<select name=" idCategoria" id=" idCategoria" class="form-control">
-	                               		<option value="" selected>Selecciona una opcion</option>
-	                               		@foreach($categorias as $categoria)
-	                               		<option value="{{$categoria->id}}">{{$categoria->nombreCategoria}}</option>
-	                               		@endforeach
-	                               	</select>
-	                            </div>
-	                    	</div>
-	                    </div>
+					   <div class="row d-flex justify-content-center">
+							<div class="col-8">
+						 		<div class="form-group">
+							 <label for="" class="text-white">Anio de Publicación</label>
+							 {!! Form::text('Anio',null,array('class'=>'form-control')) !!}
+						 		</div>
+					 		</div>
+						</div>
+
 
 	                    <div class="row d-flex justify-content-center">
 	                    	<div class="col-8">
@@ -77,11 +81,24 @@
 	                    	</div>
 	                    </div>
 
+						<div class="row d-flex justify-content-center">
+	                    	<div class="col-8">
+	                            <div class="form-group">
+	                                <label for="" class="text-white">Categorias del libro</label>
+	                               	<select class="categorias" style="width: 100%" name="categorias[]" multiple="multiple" id="categorias">
+                                            @foreach($categorias as $categoria)
+                                                <option value="{{$categoria->id}}">{{$categoria->nombreCategoria}}</option>
+                                            @endforeach
+                                    </select>
+	                            </div>
+	                    	</div>
+	                    </div>
+
 	                    <div class="row d-flex justify-content-center">
 	                    	<div class="col-8">
 	                            <div class="form-group">
 	                                <label for="" class="text-white">Autores del libro</label>
-	                               	<select class="select2-multiple form-control" name="idAutor[]" multiple="multiple" id="idAutor">
+									<select class="autores" style="width: 100%" name="autores[]" multiple="multiple" id="autores">
                                             @foreach($autores as $autor)
                                                 <option value="{{$autor->id}}">{{$autor->nombre}} {{$autor->apellidoPaterno}} {{$autor->apellidoMaterno}}</option>
                                             @endforeach
