@@ -12,6 +12,6 @@ class Editoriales extends Model
     /* RELACIONES ELOQUENT */
     //RELACION UNO A MUCHOS
     public function libros(){
-        return $this->hasMany(Libros::class);
+        return $this->hasMany(libros::class);
     }
 }
