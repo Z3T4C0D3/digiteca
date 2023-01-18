@@ -21,7 +21,8 @@ use App\Http\Controllers\UsuarioController;
 
 Auth::routes();
 
-Route::get('/home', [LibrosController::class, 'welcome'] )->name('libros.welcome');
+Route::get('/', [LibrosController::class, 'welcome'] )->name('libros.welcome');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware'=>['auth']],function(){
     Route::resource("roles",RolController::class);

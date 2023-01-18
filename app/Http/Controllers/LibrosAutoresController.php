@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\LibrosAutores;
 use Illuminate\Http\Request;
+use App\Models\Libros;
+use App\Models\Editoriales;
+use App\Models\Categorias;
+use App\Models\Autores;
+use Illuminate\Support\Facades\Storage;
+
 
 class LibrosAutoresController extends Controller
 {
@@ -14,7 +20,7 @@ class LibrosAutoresController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +30,7 @@ class LibrosAutoresController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +41,9 @@ class LibrosAutoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+       
     }
 
     /**

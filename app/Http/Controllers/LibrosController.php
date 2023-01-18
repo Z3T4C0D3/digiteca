@@ -9,6 +9,7 @@ use App\Models\Editoriales;
 use App\Models\Autores;
 use App\Models\LibrosAutores;
 use App\Models\Ejemplares;
+use Illuminate\Support\Facades\Storage;
 class LibrosController extends Controller
 {
     function __construct()
@@ -41,7 +42,7 @@ class LibrosController extends Controller
     public function create()
     {
         $categorias=Categorias::all();
-        $editoriales=Editoriales::all();
+        $editoriales = editoriales::pluck('nombreEditorial', 'id');
         $autores=Autores::all();
         return view('libros.create',compact("categorias","editoriales","autores"));
     }
@@ -54,9 +55,17 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        //return $request->file('file');
+        //return Storage::put('public/libros', $request->file('file'));
+        dd($request->all());
         $libro=Libros::Create($request->all());
 
+        if ($request->file('file')) {
+            $url=Storage::put('public/libros',$request->file('file'));
+            $libro->image()->create([
+                'url'=>$url
+            ]);
+        }
 
         foreach ($request->idAutor as $autor) {
             //dd($autor);
